@@ -1,12 +1,12 @@
 # Stage 1: Build with Maven and Java 21
-FROM --platform=linux/amd64 maven:3.9.6-eclipse-temurin-21 AS build
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 
 WORKDIR /app
 COPY . .
 RUN mvn clean package -DskipTests
 
 # Stage 2: Run with Tomcat
-FROM --platform=linux/amd64 tomcat:9.0-jdk17-temurin
+FROM tomcat:9.0-jdk17-temurin
 
 # Remove default apps
 RUN rm -rf /usr/local/tomcat/webapps/*
